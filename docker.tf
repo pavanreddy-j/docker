@@ -1,5 +1,5 @@
 resource "aws_instance" "expense" {
-    count = 1
+    
     ami   = "ami-09c813fb71547fc4f"
     vpc_security_group_ids = [aws_security_group.allow_all_docker.id]
     instance_type = "t3.micro"
@@ -42,4 +42,7 @@ resource "aws_security_group" "allow_all_docker" {
     tags ={
         Name ="allow_tls"
     }
+}
+output "docker_ip" {
+  value       = aws_instance.expense.public_ip
 }
